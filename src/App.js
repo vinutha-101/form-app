@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import Form from "./Form"; // Import the Form component
-import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap styles
+import Form from "./Form"; 
+import "bootstrap/dist/css/bootstrap.min.css"; 
 
 function App() {
   const [reload, setReload] = useState(false);
 
-  // Function to refresh the page after form submission
   const handleFormSubmit = () => {
-    setReload(!reload); // Triggers a re-render
+    setReload(!reload); 
   };
 
   return (
