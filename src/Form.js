@@ -10,16 +10,13 @@ const Form = ({ onSubmit }) => {
     gender: "",
   });
 
-  // Handle input changes
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validation: Ensure all fields are filled
     if (!formData.name || !formData.age || !formData.select || !formData.city || !formData.hobbies || !formData.gender) {
       alert("Please fill in all fields.");
       return;
@@ -33,14 +30,13 @@ const Form = ({ onSubmit }) => {
       });
 
       alert("Entry saved successfully!");
-      onSubmit(); // Callback to refresh data
+      onSubmit();
     } catch (error) {
       console.error("Error saving entry:", error);
       alert("An error occurred while saving. Please try again.");
     }
   };
 
-  // Generate a custom ID
   const generateId = (length = 5) => {
     return [...crypto.getRandomValues(new Uint8Array(length))]
       .map(byte => byte.toString(16).padStart(2, "0"))
