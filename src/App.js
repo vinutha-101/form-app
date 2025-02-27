@@ -1,19 +1,20 @@
-import React, { useState } from "react";
-import Form from "./Form"; 
-import "bootstrap/dist/css/bootstrap.min.css"; 
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Table from "./Table";
+import Form from "./Form";
+import Edit from "./Edit"; 
+
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
-  const [reload, setReload] = useState(false);
-
-  const handleFormSubmit = () => {
-    setReload(!reload); 
-  };
-
   return (
-    <div className="container mt-4">
-      <h1 className="text-center mb-4">React Form with JSON Server</h1>
-      <Form onSubmit={handleFormSubmit} />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Table />} />
+        <Route path="/form" element={<Form />} />
+        <Route path="/edit/:id" element={<Edit />} />
+      </Routes>
+    </Router>
   );
 }
 
