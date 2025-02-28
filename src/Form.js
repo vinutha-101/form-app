@@ -30,12 +30,12 @@ const Form = ({ onSubmit }) => {
       });
 
       alert("Entry saved successfully!");
-      onSubmit();
-    } catch (error) {
-      console.error("Error saving entry:", error);
-      alert("An error occurred while saving. Please try again.");
-    }
-  };
+      window.location.href = "/";
+  } catch (error) {
+    console.error("Error saving entry:", error);
+    alert("An error occurred while saving. Please try again.");
+  }
+};
 
   const generateId = (length = 5) => {
     return [...crypto.getRandomValues(new Uint8Array(length))]
