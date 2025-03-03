@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 const Form = ({ onSubmit }) => {
+
   const [formData, setFormData] = useState({
     name: "",
     age: "",
@@ -23,25 +24,23 @@ const Form = ({ onSubmit }) => {
     }
 
     try {
-      await fetch("http://localhost:3001/entries", {
+      const response = await fetch("http://localhost:3001/entries", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formData, id: generateId(5) }),
+        body: JSON.stringify(formData),
       });
 
+      if (!response.ok) {
+        throw new Error("Failed to save entry.");
+      }
+
       alert("Entry saved successfully!");
-      onSubmit();
+
+      window.location.href = "/";
     } catch (error) {
       console.error("Error saving entry:", error);
-      alert("An error occurred while saving. Please try again.");
+      alert("An error occurred. Please try again.");
     }
-  };
-
-  const generateId = (length = 5) => {
-    return [...crypto.getRandomValues(new Uint8Array(length))]
-      .map(byte => byte.toString(16).padStart(2, "0"))
-      .join("")
-      .slice(0, length);
   };
 
   return (
