@@ -50,8 +50,39 @@ app.delete("/entries/:id", (req, res) => {
   });
 });
 
-app.get("/", (req, res) => {
-  res.send("Server is running! Try /entries to see stored data.");
+app.get("/entries/:id", (req, res) => {
+  fs.readFile(dbPath, "utf8", (err, data) => {
+    if (err) return res.status(500).json({ message: "Error reading file" });
+
+    let jsonData = JSON.parse(data);
+    const entry = jsonData.entries.find((entry) => entry.id === req.params.id);
+
+    if (!entry) {
+      return res.status(404).json({ message: "Entry not found" });
+    }
+
+    res.json(entry);
+  });
+});
+
+app.put("/entries/:id", (req, res) => {
+  fs.readFile(dbPath, "utf8", (err, data) => {
+    if (err) return res.status(500).json({ message: "Error reading file" });
+
+    let jsonData = JSON.parse(data);
+    let entryIndex = jsonData.entries.findIndex((entry) => entry.id === req.params.id);
+
+    if (entryIndex === -1) {
+      return res.status(404).json({ message: "Entry not found" });
+    }
+
+    jsonData.entries[entryIndex] = { ...jsonData.entries[entryIndex], ...req.body };
+
+    fs.writeFile(dbPath, JSON.stringify(jsonData, null, 2), (err) => {
+      if (err) return res.status(500).json({ message: "Error writing file" });
+      res.json({ message: "Entry updated successfully" });
+    });
+  });
 });
 
 app.listen(PORT, () => {
