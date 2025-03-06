@@ -4,7 +4,7 @@ const Table = () => {
   const [entries, setEntries] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3001/entries")
+    fetch("http://localhost:3001/users")
       .then((response) => response.json())
       .then((data) => setEntries(data))
       .catch((error) => console.error("Error fetching data:", error));
@@ -12,7 +12,7 @@ const Table = () => {
 
   const deleteEntry = (id) => {
     if (window.confirm("Are you sure you want to delete this entry?")) {
-      fetch(`http://localhost:3001/entries/${id}`, { method: "DELETE" })
+      fetch(`http://localhost:3001/users/${id}`, { method: "DELETE" })
         .then((response) => {
           if (!response.ok) throw new Error("Failed to delete entry.");
           return response.json();
