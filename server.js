@@ -15,14 +15,14 @@ if (!fs.existsSync(dbPath)) {
   fs.writeFileSync(dbPath, JSON.stringify({ users: [] }, null, 2));
 }
 
-app.get("/entries", (req, res) => {
+app.get("/display", (req, res) => {
   fs.readFile(dbPath, "utf8", (err, data) => {
     if (err) return res.status(500).json({ message: "Error reading file" });
     res.json(JSON.parse(data).users);
   });
 });
 
-app.post("/entries", (req, res) => {
+app.post("/create", (req, res) => {
   fs.readFile(dbPath, "utf8", (err, data) => {
     if (err) return res.status(500).json({ message: "Error reading file" });
 
@@ -36,7 +36,7 @@ app.post("/entries", (req, res) => {
   });
 });
 
-app.delete("/entries/:id", (req, res) => {
+app.delete("/delete/:id", (req, res) => {
   fs.readFile(dbPath, "utf8", (err, data) => {
     if (err) return res.status(500).json({ message: "Error reading file" });
 
@@ -50,7 +50,7 @@ app.delete("/entries/:id", (req, res) => {
   });
 });
 
-app.get("/entries/:id", (req, res) => {
+app.get("/display/:id", (req, res) => {
   fs.readFile(dbPath, "utf8", (err, data) => {
     if (err) return res.status(500).json({ message: "Error reading file" });
 
@@ -65,7 +65,7 @@ app.get("/entries/:id", (req, res) => {
   });
 });
 
-app.put("/entries/:id", (req, res) => {
+app.put("/edit/:id", (req, res) => {
   fs.readFile(dbPath, "utf8", (err, data) => {
     if (err) return res.status(500).json({ message: "Error reading file" });
 
