@@ -24,7 +24,7 @@ const Form = ({ onSubmit }) => {
     }
 
     try {
-      const response = await fetch("http://localhost:3001/users", {
+      const response = await fetch("http://localhost:3001/create", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -35,7 +35,6 @@ const Form = ({ onSubmit }) => {
       }
 
       alert("Entry saved successfully!");
-
       window.location.href = "/";
     } catch (error) {
       console.error("Error saving entry:", error);

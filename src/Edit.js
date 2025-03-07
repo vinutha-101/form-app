@@ -10,7 +10,7 @@ const Edit = () => {
   useEffect(() => {
     console.log("Fetching entry with ID:", id); 
 
-    fetch(`http://localhost:3001/users/${id}`)
+    fetch(`http://localhost:3001/display/${id}`)
       .then((response) => {
         console.log("Response status:", response.status); 
         if (!response.ok) {
@@ -38,7 +38,7 @@ const Edit = () => {
     try {
       console.log("Submitting update for ID:", id); 
   
-      const response = await fetch(`http://localhost:3001/users/${id}`, {
+      const response = await fetch(`http://localhost:3001/edit/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
